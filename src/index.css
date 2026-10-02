@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Custom utility classes */
+.text-chocolate {
+  color: #36221d;
+}
+
+.bg-chocolate {
+  background-color: #36221d;
+}
+
+.text-cream {
+  color: #f5f1ed;
+}
+
+.bg-cream {
+  background-color: #f5f1ed;
+}
+
+.text-gold {
+  color: #d4a574;
+}
+
+.border-gold {
+  border-color: #d4a574;
+}
