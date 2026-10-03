@@ -26,7 +26,7 @@ export async function getProducts(page: number = 1, limit: number = 20): Promise
   params.append('page', String(page));
   params.append('limit', String(limit));
 
-  const endpoint = `/products?${params.toString()}`;
+  const endpoint = `/api/products?${params.toString()}`;
   return apiClient.get<GetProductsResponse>(endpoint);
 }
 
@@ -34,14 +34,14 @@ export async function getProducts(page: number = 1, limit: number = 20): Promise
  * Get a single product by ID
  */
 export async function getProductById(id: string): Promise<{ product: Product }> {
-  return apiClient.get<{ product: Product }>(`/products/${id}`);
+  return apiClient.get<{ product: Product }>(`/api/products/${id}`);
 }
 
 /**
  * Get product by slug
  */
 export async function getProductBySlug(slug: string): Promise<{ product: Product }> {
-  return apiClient.get<{ product: Product }>(`/products/slug/${slug}`);
+  return apiClient.get<{ product: Product }>(`/api/products/slug/${slug}`);
 }
 
 /**
@@ -56,7 +56,7 @@ export async function getProductsByCategory(
   params.append('page', String(page));
   params.append('limit', String(limit));
 
-  const endpoint = `/products/category/${encodeURIComponent(category)}?${params.toString()}`;
+  const endpoint = `/api/products/category/${encodeURIComponent(category)}?${params.toString()}`;
   return apiClient.get<GetProductsResponse>(endpoint);
 }
 
@@ -64,5 +64,5 @@ export async function getProductsByCategory(
  * Get all categories
  */
 export async function getCategories(): Promise<{ categories: string[] }> {
-  return apiClient.get<{ categories: string[] }>('/products/categories');
+  return apiClient.get<{ categories: string[] }>('/api/products/categories');
 }
