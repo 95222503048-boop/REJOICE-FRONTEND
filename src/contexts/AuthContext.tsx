@@ -9,7 +9,12 @@ interface AuthContextType {
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  register: (userData: Omit<User, 'id' | 'createdAt'> & { password: string }) => Promise<void>;
+  register: (userData: {
+    email: string;
+    password: string;
+    name: string;
+    role: 'customer';
+  }) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -71,7 +76,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const register = async (userData: Omit<User, 'id' | 'createdAt'> & { password: string }) => {
+  const register = async (userData: {
+    email: string;
+    password: string;
+    name: string;
+    role: 'customer';
+  }) => {
     setIsLoading(true);
     setError(null);
     try {

@@ -37,12 +37,13 @@ export const RegisterPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const { confirmPassword, ...userData } = formData;
-      await register({
-        ...userData,
-        password: formData.password,
-        role: 'customer' as const,
-      });
+      const { confirmPassword, firstName, lastName, ...userData } = formData;
+    await register({
+      ...userData,
+      name: `${firstName.trim()} ${lastName.trim()}`,
+      password: formData.password,
+       role: 'customer' as const,
+});
       navigate('/my-orders');
     } catch (err) {
       setError('Registration failed. Please try again.');
