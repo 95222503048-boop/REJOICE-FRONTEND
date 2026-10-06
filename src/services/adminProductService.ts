@@ -38,21 +38,21 @@ export async function getAllProductsAdmin(page: number = 1, limit: number = 20):
   params.append('page', String(page));
   params.append('limit', String(limit));
 
-  return apiClient.get<AdminProductsResponse>(`/api/products/admin?${params.toString()}`);
+  return apiClient.get<AdminProductsResponse>(`/products/admin?${params.toString()}`);
 }
 
 /**
  * Get product by ID (admin view)
  */
 export async function getProductByIdAdmin(id: string): Promise<{ product: Product }> {
-  return apiClient.get<{ product: Product }>(`/api/products/admin/${id}`);
+  return apiClient.get<{ product: Product }>(`/products/admin/${id}`);
 }
 
 /**
  * Create new product
  */
 export async function createProduct(data: CreateProductRequest): Promise<{ product: Product; message: string }> {
-  return apiClient.post<{ product: Product; message: string }>('/api/products/admin', data);
+  return apiClient.post<{ product: Product; message: string }>('/products/admin', data);
 }
 
 /**
@@ -62,7 +62,7 @@ export async function updateProduct(
   id: string,
   data: UpdateProductRequest,
 ): Promise<{ product: Product; message: string }> {
-  return apiClient.patch<{ product: Product; message: string }>(`/api/products/admin/${id}`, data);
+  return apiClient.patch<{ product: Product; message: string }>(`/products/admin/${id}`, data);
 }
 
 /**
@@ -72,7 +72,7 @@ export async function updateProductAvailability(
   id: string,
   available: boolean,
 ): Promise<{ product: Product; message: string }> {
-  return apiClient.patch<{ product: Product; message: string }>(`/api/products/admin/${id}/availability`, {
+  return apiClient.patch<{ product: Product; message: string }>(`/products/admin/${id}/availability`, {
     available,
   });
 }
@@ -81,5 +81,5 @@ export async function updateProductAvailability(
  * Deactivate product (soft delete)
  */
 export async function deactivateProduct(id: string): Promise<{ message: string }> {
-  return apiClient.delete<{ message: string }>(`/api/products/admin/${id}`);
+  return apiClient.delete<{ message: string }>(`/products/admin/${id}`);
 }

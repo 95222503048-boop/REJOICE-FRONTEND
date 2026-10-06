@@ -87,7 +87,7 @@ export interface CancelOrderResponse {
  * Backend is authoritative for all prices and calculations
  */
 export async function createOrder(orderData: CreateOrderRequest): Promise<CreateOrderResponse> {
-  return apiClient.post<CreateOrderResponse>('/api/orders', orderData);
+  return apiClient.post<CreateOrderResponse>('/orders', orderData);
 }
 
 /**
@@ -97,7 +97,7 @@ export async function getOrders(page: number = 1, limit: number = 10): Promise<G
   const params = new URLSearchParams();
   params.append('page', String(page));
   params.append('limit', String(limit));
-  return apiClient.get<GetOrdersResponse>(`/api/orders?${params.toString()}`);
+  return apiClient.get<GetOrdersResponse>(`/orders?${params.toString()}`);
 }
 
 /**
@@ -105,12 +105,12 @@ export async function getOrders(page: number = 1, limit: number = 10): Promise<G
  * Backend enforces ownership (customer can only see their own orders)
  */
 export async function getOrderById(orderId: string): Promise<{ order: Order }> {
-  return apiClient.get<{ order: Order }>(`/api/orders/${orderId}`);
+  return apiClient.get<{ order: Order }>(`/orders/${orderId}`);
 }
 
 /**
  * Cancel an order (must be in REQUESTED status)
  */
 export async function cancelOrder(orderId: string): Promise<CancelOrderResponse> {
-  return apiClient.patch<CancelOrderResponse>(`/api/orders/${orderId}/cancel`);
+  return apiClient.patch<CancelOrderResponse>(`/orders/${orderId}/cancel`);
 }

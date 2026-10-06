@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsLoading(true);
       setError(null);
       try {
-        const response = await apiClient.get<{ user: User }>('/api/auth/me');
+        const response = await apiClient.get<{ user: User }>('/auth/me');
         setUser(response.user);
       } catch (err) {
         // No active session, which is normal on first load
@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     setError(null);
     try {
-      const response = await apiClient.post<{ user: User }>('/api/auth/login', {
+      const response = await apiClient.post<{ user: User }>('/auth/login', {
         email,
         password,
       });
@@ -66,7 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     setError(null);
     try {
-      await apiClient.post('/api/auth/logout');
+      await apiClient.post('/auth/logout');
     } catch (err) {
       console.error('Logout error:', err);
       // Clear user state even if logout fails
@@ -85,7 +85,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     setError(null);
     try {
-      const response = await apiClient.post<{ user: User }>('/api/auth/register', userData);
+      const response = await apiClient.post<{ user: User }>('/auth/register', userData);
       setUser(response.user);
     } catch (err) {
       const apiError = err as APIError;

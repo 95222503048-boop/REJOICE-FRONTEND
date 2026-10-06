@@ -41,7 +41,7 @@ class APIClient {
 
     this.csrfTokenPromise = (async () => {
       try {
-        const response = await fetch(`${this.baseUrl}/api/csrf-token`, {
+        const response = await fetch(`${this.baseUrl}/csrf-token`, {
           method: 'GET',
           credentials: 'include',
         });

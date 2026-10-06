@@ -34,14 +34,14 @@ export interface CartMutationResponse {
  * Get current user's cart
  */
 export async function getCart(): Promise<GetCartResponse> {
-  return apiClient.get<GetCartResponse>('/api/cart');
+  return apiClient.get<GetCartResponse>('/cart');
 }
 
 /**
  * Add product to cart
  */
 export async function addToCart(productId: string, quantity: number): Promise<CartMutationResponse> {
-  return apiClient.post<CartMutationResponse>('/api/cart/items', {
+  return apiClient.post<CartMutationResponse>('/cart/items', {
     productId,
     quantity,
   });
@@ -54,7 +54,7 @@ export async function updateCartItem(
   productId: string,
   quantity: number,
 ): Promise<CartMutationResponse> {
-  return apiClient.patch<CartMutationResponse>(`/api/cart/items/${productId}`, {
+  return apiClient.patch<CartMutationResponse>(`/cart/items/${productId}`, {
     quantity,
   });
 }
@@ -63,12 +63,12 @@ export async function updateCartItem(
  * Remove item from cart
  */
 export async function removeFromCart(productId: string): Promise<CartMutationResponse> {
-  return apiClient.delete<CartMutationResponse>(`/api/cart/items/${productId}`);
+  return apiClient.delete<CartMutationResponse>(`/cart/items/${productId}`);
 }
 
 /**
  * Clear entire cart
  */
 export async function clearCart(): Promise<{ message: string }> {
-  return apiClient.delete<{ message: string }>('/api/cart');
+  return apiClient.delete<{ message: string }>('/cart');
 }
