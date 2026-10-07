@@ -9,11 +9,10 @@ import { Pagination } from './productService';
 
 export interface CreateProductRequest {
   name: string;
-  slug: string;
   description: string;
-  category: string;
+  category: 'cake' | 'biscuit' | 'sweets' | 'special';
   basePrice: number; // in paise
-  tags?: string[];
+  available?: boolean;
 }
 
 export interface UpdateProductRequest {

@@ -24,6 +24,15 @@ export const AdminProductsPage: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [deletingProductId, setDeletingProductId] = useState<string | null>(null);
   const [isManagingImages, setIsManagingImages] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    description: '',
+    category: 'cake' as 'cake' | 'biscuit' | 'sweets' | 'special',
+    price: '',
+    available: true,
+  });
   const [imageManagementProductId, setImageManagementProductId] = useState<string | null>(null);
   const [imageManagementProductName, setImageManagementProductName] = useState<string>('');
 
@@ -76,6 +85,47 @@ export const AdminProductsPage: React.FC = () => {
       setError(null);
     } catch (err) {
       setError(`Failed to update product: ${err instanceof Error ? err.message : 'Unknown error'}`);
+    }
+  };
+
+  const handleCreateSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const price = Number(newProduct.price);
+
+    if (!Number.isFinite(price) || price < 0) {
+      setError('Please enter a valid price');
+      return;
+    }
+
+    try {
+      const response = await adminProductService.createProduct({
+        name: newProduct.name.trim(),
+        description: newProduct.description.trim(),
+        category: newProduct.category,
+        basePrice: Math.round(price * 100),
+        available: newProduct.available,
+      });
+
+      setProducts((currentProducts) => [
+        response.product,
+        ...currentProducts,
+      ]);
+
+      setIsCreating(false);
+      setNewProduct({
+        name: '',
+        description: '',
+        category: 'cake',
+        price: '',
+        available: true,
+      });
+      setError(null);
+    } catch (err) {
+      setError(
+        `Failed to create product: ${err instanceof Error ? err.message : 'Unknown error'
+        }`,
+      );
     }
   };
 
@@ -140,7 +190,19 @@ export const AdminProductsPage: React.FC = () => {
   return (
     <CustomerLayout>
       <section className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">Product Management</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="font-playfair text-3xl font-bold text-chocolate">
+            Product Management
+          </h1>
+
+          <button
+            type="button"
+            onClick={() => setIsCreating(true)}
+            className="bg-chocolate text-cream px-5 py-2 rounded font-semibold hover:bg-chocolate/90"
+          >
+            Add Menu Item
+          </button>
+        </div>
 
         {error && <div className="bg-red-50 border border-red-200 rounded p-4 mb-4 text-red-700">{error}</div>}
 
@@ -164,30 +226,29 @@ export const AdminProductsPage: React.FC = () => {
                     {formatPrice(product.basePrice)}
                   </td>
                   <td className="px-6 py-4 text-center">
-                    <span className={`px-2 py-1 rounded text-xs font-semibold ${
-                      product.available
+                    <span className={`px-2 py-1 rounded text-xs font-semibold ${product.available
                         ? 'bg-green-100 text-green-700'
                         : 'bg-red-100 text-red-700'
-                    }`}>
+                      }`}>
                       {product.available ? 'Yes' : 'No'}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-center text-sm">
-                    <button 
+                    <button
                       onClick={() => handleEditClick(product)}
                       className="text-chocolate hover:underline mr-3"
                       disabled={isLoading}
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       onClick={() => handleImagesClick(product)}
                       className="text-blue-600 hover:underline mr-3"
                       disabled={isLoading}
                     >
                       Images
                     </button>
-                    <button 
+                    <button
                       onClick={() => handleDeleteClick(getProductId(product))}
                       className="text-red-600 hover:underline disabled:opacity-50"
                       disabled={isLoading}
@@ -202,6 +263,122 @@ export const AdminProductsPage: React.FC = () => {
         </div>
 
         <p className="text-sm text-gray-600 mt-4">Total: {products.length} products</p>
+
+        {/* Create Product Modal */}
+        {isCreating && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg max-w-md w-full p-6">
+              <h2 className="font-playfair text-2xl font-bold text-chocolate mb-4">
+                Add Menu Item
+              </h2>
+
+              <form onSubmit={handleCreateSubmit}>
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold text-chocolate mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    value={newProduct.name}
+                    onChange={(e) =>
+                      setNewProduct({ ...newProduct, name: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-gold rounded"
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold text-chocolate mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    value={newProduct.description}
+                    onChange={(e) =>
+                      setNewProduct({ ...newProduct, description: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-gold rounded"
+                    rows={3}
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold text-chocolate mb-1">
+                    Category
+                  </label>
+                  <select
+                    value={newProduct.category}
+                    onChange={(e) =>
+                      setNewProduct({
+                        ...newProduct,
+                        category: e.target.value as
+                          | 'cake'
+                          | 'biscuit'
+                          | 'sweets'
+                          | 'special',
+                      })
+                    }
+                    className="w-full px-3 py-2 border border-gold rounded"
+                  >
+                    <option value="cake">Cake</option>
+                    <option value="biscuit">Biscuit</option>
+                    <option value="sweets">Sweets</option>
+                    <option value="special">Special</option>
+                  </select>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-semibold text-chocolate mb-1">
+                    Price (₹)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={newProduct.price}
+                    onChange={(e) =>
+                      setNewProduct({ ...newProduct, price: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-gold rounded"
+                    required
+                  />
+                </div>
+
+                <label className="flex items-center gap-2 mb-6 text-sm font-semibold text-chocolate">
+                  <input
+                    type="checkbox"
+                    checked={newProduct.available}
+                    onChange={(e) =>
+                      setNewProduct({
+                        ...newProduct,
+                        available: e.target.checked,
+                      })
+                    }
+                  />
+                  Available for customers
+                </label>
+
+                <div className="flex gap-3">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-chocolate text-cream px-4 py-2 rounded font-semibold hover:bg-chocolate/90"
+                  >
+                    Create
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsCreating(false)}
+                    className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-400"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
 
         {/* Edit Modal */}
         {isEditing && editingProduct && (
