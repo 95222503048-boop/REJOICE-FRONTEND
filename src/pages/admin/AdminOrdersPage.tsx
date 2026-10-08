@@ -81,9 +81,8 @@ export const AdminOrdersPage: React.FC = () => {
               <div
                 key={order.id}
                 onClick={() => { setSelectedOrder(order); setNewStatus(''); }}
-                className={`bg-white rounded-lg shadow-md p-6 cursor-pointer border-2 ${
-                  selectedOrder?.id === order.id ? 'border-chocolate' : 'border-transparent'
-                }`}
+                className={`bg-white rounded-lg shadow-md p-6 cursor-pointer border-2 ${selectedOrder?.id === order.id ? 'border-chocolate' : 'border-transparent'
+                  }`}
               >
                 <div className="flex justify-between items-start">
                   <div>
@@ -95,6 +94,15 @@ export const AdminOrdersPage: React.FC = () => {
                   </span>
                 </div>
                 <p className="text-sm text-gray-600 mt-2">{order.items.length} items</p>
+                <div className="mt-3">
+                  <p className="font-semibold text-chocolate">
+                    {order.customer?.name || 'Unknown customer'}
+                  </p>
+
+                  <p className="text-sm text-gray-600">
+                    {order.customer?.phone || 'Phone not provided'}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -105,6 +113,14 @@ export const AdminOrdersPage: React.FC = () => {
                 <h2 className="font-playfair text-xl font-bold text-chocolate mb-4">Order Details</h2>
 
                 <div className="space-y-2 mb-4 pb-4 border-b border-gold/20">
+                  <p className="text-sm">
+                    <span className="font-semibold">Customer:</span>{' '}
+                    {selectedOrder.customer?.name || 'Unknown customer'}
+                  </p>
+
+                  <p className="text-sm">
+                    <span className="font-semibold">Mobile:</span>{' '}{selectedOrder.customer?.phone || 'Phone not provided'}
+                  </p>
                   <p className="text-sm"><span className="font-semibold">ID:</span> {selectedOrder.id}</p>
                   <p className="text-sm"><span className="font-semibold">Total:</span> {formatPrice(selectedOrder.totalPaise)}</p>
                   <p className="text-sm"><span className="font-semibold">Mode:</span> {selectedOrder.deliveryMode}</p>

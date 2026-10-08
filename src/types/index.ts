@@ -3,6 +3,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  phone?: string;
   role: 'customer' | 'admin';
   createdAt?: string;
 }
@@ -83,6 +84,10 @@ export interface OrderItem {
 
 export interface Order {
   id: string;
+  customer?: {
+  name: string;
+  phone?: string;
+  };
   items: OrderItem[];
   subtotalPaise: number;
   deliveryFeePaise: number;

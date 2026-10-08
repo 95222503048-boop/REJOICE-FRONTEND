@@ -36,6 +36,10 @@ export type DeliveryMode = (typeof DeliveryMode)[keyof typeof DeliveryMode];
 
 export interface Order {
   id: string;
+  customer?: {
+    name: string;
+    phone?: string;
+  };
   items: OrderItem[];
   subtotalPaise: number;
   deliveryFeePaise: number;
