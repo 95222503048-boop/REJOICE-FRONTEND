@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CustomerLayout } from '../../layouts/CustomerLayout';
 import { useAuth } from '../../contexts/AuthContext';
 import * as adminProductService from '../../services/adminProductService';
@@ -15,6 +16,7 @@ interface EditingProduct {
 }
 
 export const AdminProductsPage: React.FC = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -190,20 +192,29 @@ export const AdminProductsPage: React.FC = () => {
   return (
     <CustomerLayout>
       <section className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="font-playfair text-3xl font-bold text-chocolate">
-            Product Management
-          </h1>
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+  <h1 className="font-playfair text-3xl font-bold text-chocolate">
+    Product Management
+  </h1>
 
-          <button
-            type="button"
-            onClick={() => setIsCreating(true)}
-            className="bg-chocolate text-cream px-5 py-2 rounded font-semibold hover:bg-chocolate/90"
-          >
-            Add Menu Item
-          </button>
-        </div>
+  <div className="flex flex-wrap gap-3">
+    <button
+      type="button"
+      onClick={() => navigate('/admin/orders')}
+      className="bg-blue-600 text-white px-5 py-2 rounded font-semibold hover:bg-blue-700"
+    >
+      Orders Management
+    </button>
 
+    <button
+      type="button"
+      onClick={() => setIsCreating(true)}
+      className="bg-chocolate text-cream px-5 py-2 rounded font-semibold hover:bg-chocolate/90"
+    >
+      Add Menu Item
+    </button>
+  </div>
+</div>
         {error && <div className="bg-red-50 border border-red-200 rounded p-4 mb-4 text-red-700">{error}</div>}
 
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -418,7 +429,7 @@ export const AdminProductsPage: React.FC = () => {
                 </div>
                 <div className="mb-6">
                   <label className="block text-sm font-semibold text-chocolate mb-1">Price (₹)</label>
-                  <input
+                  <input  
                     type="number"
                     step="100"
                     value={Math.floor(editingProduct.basePrice / 100)}
