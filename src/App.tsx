@@ -21,6 +21,12 @@ import { AboutPage } from './pages/customer/AboutPage';
 import { AdminProductsPage } from './pages/admin/AdminProductsPage';
 import { AdminOrdersPage } from './pages/admin/AdminOrdersPage';
 
+import {
+  TermsPage,
+  CookiePolicyPage,
+  PrivacyPolicyPage,
+} from './pages/customer/LegalPages';
+
 function App() {
   return (
     <BrowserRouter>
@@ -47,6 +53,10 @@ function App() {
             {/* Admin Routes */}
             <Route path="/admin/products" element={<AdminProductsPage />} />
             <Route path="/admin/orders" element={<AdminOrdersPage />} />
+
+            <Route path="/terms" element={<TermsPage />} />
+<Route path="/cookie-policy" element={<CookiePolicyPage />} />
+<Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" />} />

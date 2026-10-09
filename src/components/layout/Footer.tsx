@@ -88,12 +88,31 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-gold/20 pt-6 text-center text-xs text-gold/70">
-          <p>
-            © {new Date().getFullYear()} {BUSINESS_INFO.name}. All rights reserved.
-          </p>
-          <p className="mt-2">Baked with Love. Made to Rejoice.</p>
-        </div>
+        {/* Bottom bar */}
+<div className="border-t border-gold/20 pt-6 text-center text-xs text-gold/70">
+  <p>
+    © {new Date().getFullYear()} {BUSINESS_INFO.name}. All rights reserved.
+  </p>
+
+  <p className="mt-2">Baked with Love. Made to Rejoice.</p>
+
+  <nav
+    aria-label="Legal links"
+    className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2"
+  >
+    <Link to="/terms" className="hover:text-cream hover:underline">
+      Terms &amp; Conditions
+    </Link>
+
+    <Link to="/cookie-policy" className="hover:text-cream hover:underline">
+      Cookie Policy
+    </Link>
+
+    <Link to="/privacy-policy" className="hover:text-cream hover:underline">
+      Privacy Policy
+    </Link>
+  </nav>
+</div>
       </div>
     </footer>
   );
