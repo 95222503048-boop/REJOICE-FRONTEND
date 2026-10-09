@@ -44,28 +44,38 @@ export const AdminImageManagementModal: React.FC<AdminImageManagementModalProps>
     }
   };
 
-  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.currentTarget.files;
-    if (!files || files.length === 0) return;
+  const handleFileSelect = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  const inputElement = e.currentTarget;
+  const files = inputElement.files;
 
-    const fileArray = Array.from(files);
-    setIsUploading(true);
-    setUploadError(null);
+  if (!files || files.length === 0) return;
 
-    try {
-      await adminImageService.uploadProductImages(productId, fileArray);
-      // Reload images after successful upload
-      await loadImages();
-      // Reset file input
-      e.currentTarget.value = '';
-      onImageUpdate();
-    } catch (err) {
-      console.error('Failed to upload images:', err);
-      setUploadError(`Failed to upload images: ${err instanceof Error ? err.message : 'Unknown error'}`);
-    } finally {
-      setIsUploading(false);
-    }
-  };
+  const fileArray = Array.from(files);
+  setIsUploading(true);
+  setUploadError(null);
+
+  try {
+    await adminImageService.uploadProductImages(productId, fileArray);
+
+    await loadImages();
+
+    // Reset the file input safely
+    inputElement.value = '';
+
+    onImageUpdate();
+  } catch (err) {
+    console.error('Failed to upload images:', err);
+    setUploadError(
+      `Failed to upload images: ${
+        err instanceof Error ? err.message : 'Unknown error'
+      }`
+    );
+  } finally {
+    setIsUploading(false);
+  }
+};
 
   const handleDeleteImage = async (imageId: string) => {
     if (!window.confirm('Are you sure you want to delete this image?')) return;
