@@ -23,8 +23,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'gr
 
   if (variant === 'featured') {
     return (
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-        <div className="bg-gradient-to-br from-gold/10 to-chocolate/10 aspect-square flex items-center justify-center overflow-hidden">
+      <article className="product-card bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
+        <div className="product-image bg-gradient-to-br from-gold/10 to-chocolate/10 aspect-[4/3] sm:aspect-square flex items-center justify-center overflow-hidden">
           {productImage ? (
             <img
               src={productImage}
@@ -32,14 +32,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'gr
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="text-6xl">🍰</div>
+            <div className="text-6xl" aria-hidden="true">🍰</div>
           )}
         </div>
-        <div className="p-6">
+        <div className="p-5 sm:p-6 flex flex-col flex-1">
           <h3 className="font-playfair text-xl font-bold text-chocolate mb-2">
             {product.name}
           </h3>
-          <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+          <p className="text-sm leading-relaxed text-gray-600 mb-4">{product.description}</p>
           <div className="flex items-center justify-between mb-4">
             <span className="font-playfair text-2xl font-bold text-chocolate">
               {formatPrice(product.basePrice)}
@@ -63,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'gr
           <button
             onClick={handleAddToCart}
             disabled={!product.available}
-            className={`w-full py-2 rounded font-semibold transition-all ${
+            className={`w-full min-h-11 py-2 rounded-full font-semibold transition-all mt-auto ${
               product.available
                 ? 'bg-chocolate text-cream hover:bg-opacity-90'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -75,13 +75,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'gr
             <p className="text-xs text-green-600 mt-2 text-center">✓ Added to cart!</p>
           )}
         </div>
-      </div>
+      </article>
     );
   }
 
   if (variant === 'list') {
     return (
-      <div className="bg-white rounded-lg shadow p-4 flex gap-4 items-start hover:shadow-lg transition-shadow">
+      <article className="product-card bg-white rounded-2xl shadow p-4 flex gap-4 items-start hover:shadow-lg transition-shadow">
         <div className="bg-gradient-to-br from-gold/10 to-chocolate/10 w-24 h-24 rounded flex items-center justify-center flex-shrink-0">
           <div className="text-4xl">🍰</div>
         </div>
@@ -115,15 +115,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'gr
             </button>
           </div>
         </div>
-      </div>
+      </article>
     );
   }
 
   // Grid variant (default)
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
-      <div className="bg-gradient-to-br from-gold/10 to-chocolate/10 aspect-square flex items-center justify-center">
-        <div className="text-5xl">🍰</div>
+    <article className="product-card bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+      <div className="product-image bg-gradient-to-br from-gold/10 to-chocolate/10 aspect-[4/3] sm:aspect-square flex items-center justify-center overflow-hidden">
+        {productImage ? <img src={productImage} alt={product.name} className="w-full h-full object-cover" loading="lazy" /> : <div className="text-5xl" aria-hidden="true">🍰</div>}
       </div>
       <div className="p-4 flex flex-col flex-1">
         <h4 className="font-playfair font-bold text-chocolate mb-1 text-sm">
@@ -153,6 +153,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, variant = 'gr
           <p className="text-xs text-green-600 mt-1 text-center">✓ Added!</p>
         )}
       </div>
-    </div>
+    </article>
   );
 };

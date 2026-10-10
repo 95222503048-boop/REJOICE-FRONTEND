@@ -29,59 +29,59 @@ export const HomePage: React.FC = () => {
   return (
     <CustomerLayout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-chocolate via-chocolate to-chocolate/90 text-cream py-24 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="mb-8">
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold mb-4 leading-tight">
-              {BUSINESS_INFO.name}
+      <section className="home-hero relative overflow-hidden bg-chocolate text-cream px-4 py-14 sm:py-20 lg:py-24">
+        <div className="hero-glow hero-glow-one" aria-hidden="true" />
+        <div className="hero-glow hero-glow-two" aria-hidden="true" />
+        <div className="relative max-w-7xl mx-auto grid lg:grid-cols-[1.15fr_.85fr] gap-10 lg:gap-16 items-center">
+          <div className="max-w-2xl text-center lg:text-left mx-auto lg:mx-0">
+            <p className="hero-eyebrow mb-5"><span aria-hidden="true">✦</span> Freshly baked, made for your moment</p>
+            <h1 className="font-playfair text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold mb-5 leading-[1.08]">
+              A little joy,<br className="hidden sm:block" /> baked fresh.
             </h1>
-            <p className="text-2xl text-gold mb-6 font-playfair italic">
+            <p className="text-lg sm:text-xl text-gold mb-4 font-playfair italic">
               {BUSINESS_INFO.tagline}
             </p>
-            <p className="text-lg text-cream/90 max-w-2xl mx-auto mb-8">
-              {BUSINESS_INFO.description}
+            <p className="text-base sm:text-lg text-cream/80 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+              {BUSINESS_INFO.description} Handcrafted cakes and sweets for the moments worth celebrating.
             </p>
-          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex gap-4 justify-center flex-wrap">
+            <div className="flex gap-3 justify-center lg:justify-start flex-col sm:flex-row">
             <Link
               to="/menu"
-              className="bg-gold text-chocolate px-8 py-4 rounded font-bold text-lg hover:bg-opacity-90 transition-all"
+              className="hero-primary-cta"
             >
-              Browse Menu
+              Explore the menu <span aria-hidden="true">→</span>
             </Link>
             <Link
-              to="/reviews"
-              className="bg-cream text-chocolate px-8 py-4 rounded font-bold text-lg hover:bg-opacity-90 transition-all"
+              to="/help"
+              className="hero-secondary-cta"
             >
-              Read Reviews
+              Plan a celebration
             </Link>
           </div>
 
           {/* Trust Badges */}
-          <div className="mt-12 flex justify-center gap-8 text-sm flex-wrap">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🏆</span>
-              <span>Artisan Quality</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🌾</span>
-              <span>Local Ingredients</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🚚</span>
-              <span>Fast Delivery</span>
-            </div>
+          <div className="mt-8 flex justify-center lg:justify-start gap-x-5 gap-y-3 text-xs sm:text-sm text-cream/75 flex-wrap">
+            <div className="flex items-center gap-2"><span className="text-gold" aria-hidden="true">✦</span><span>Small-batch baking</span></div>
+            <div className="flex items-center gap-2"><span className="text-gold" aria-hidden="true">✦</span><span>Made to order</span></div>
+            <div className="flex items-center gap-2"><span className="text-gold" aria-hidden="true">✦</span><span>Local ingredients</span></div>
           </div>
+        </div>
+
+        <div className="hero-showcase relative hidden sm:flex items-center justify-center" aria-label="A taste of our handcrafted cakes">
+          <div className="hero-orbit" aria-hidden="true" />
+          <div className="hero-cake-art" aria-hidden="true"><span>🍰</span></div>
+          <div className="hero-note"><span className="text-gold">Made with care</span><span>for your sweetest days</span></div>
+          <div className="hero-stamp" aria-hidden="true">BAKED<br />FRESH<br /><span>✦</span></div>
+        </div>
         </div>
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-16 px-4 bg-cream">
+      <section className="py-14 sm:py-20 px-4 bg-cream">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-playfair text-4xl font-bold text-chocolate mb-3">
+            <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-chocolate mb-3">
               Featured Creations
             </h2>
             <p className="text-gray-700 max-w-2xl mx-auto">
@@ -113,9 +113,9 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-14 sm:py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-playfair text-4xl font-bold text-chocolate text-center mb-12">
+          <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-chocolate text-center mb-10 sm:mb-12">
             Why Rejoice Cakes?
           </h2>
 
@@ -154,10 +154,10 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-16 px-4 bg-gold/5">
+      <section className="py-14 sm:py-20 px-4 bg-gold/5">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-playfair text-4xl font-bold text-chocolate mb-3">
+            <h2 className="font-playfair text-3xl sm:text-4xl font-bold text-chocolate mb-3">
               Customer Love
             </h2>
             <p className="text-gray-700">
@@ -192,16 +192,17 @@ export const HomePage: React.FC = () => {
             Subscribe to receive updates on new creations and special discounts
           </p>
 
-          <div className="flex gap-2">
+          <form className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
               placeholder="Your email"
-              className="flex-1 px-4 py-3 rounded text-chocolate focus:outline-none"
+              aria-label="Email address"
+              className="flex-1 min-w-0 px-4 py-3 rounded-xl text-chocolate focus:outline-none"
             />
-            <button className="bg-gold text-chocolate px-6 py-3 rounded font-bold hover:bg-opacity-90 transition-all">
+            <button type="button" className="bg-gold text-chocolate px-6 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all">
               Subscribe
             </button>
-          </div>
+          </form>
         </div>
       </section>
     </CustomerLayout>

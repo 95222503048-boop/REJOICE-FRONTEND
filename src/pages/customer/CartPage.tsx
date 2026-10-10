@@ -66,7 +66,7 @@ export const CartPage: React.FC = () => {
             {items.map((item) => (
               <div
                 key={item.productId}
-                className="bg-white rounded-lg shadow-md p-4 flex gap-4"
+                className="bg-white rounded-2xl shadow-md p-4 sm:p-5 flex flex-col sm:flex-row gap-4"
               >
                 <div className="bg-gradient-to-br from-gold/20 to-chocolate/20 w-20 h-20 rounded flex items-center justify-center flex-shrink-0">
                   <div className="text-3xl">🍰</div>
@@ -75,7 +75,7 @@ export const CartPage: React.FC = () => {
                   <h3 className="font-semibold text-chocolate">{item.name}</h3>
                   <p className="text-sm text-gray-600">{formatPrice(item.basePrice)} each</p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center justify-between sm:justify-end gap-3">
                   <div className="flex items-center border border-gold/30 rounded">
                     <button
                       onClick={() =>
@@ -110,7 +110,7 @@ export const CartPage: React.FC = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+            <div className="bg-white rounded-2xl shadow-md p-5 sm:p-6 lg:sticky lg:top-24">
               <h2 className="font-playfair text-xl font-bold text-chocolate mb-4">
                 Order Summary
               </h2>
