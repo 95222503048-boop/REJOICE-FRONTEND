@@ -39,7 +39,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div data-reveal="up" className="motion-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       {/* Header */}
       <div className="bg-chocolate text-cream p-4 flex justify-between items-start">
         <div>

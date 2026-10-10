@@ -44,38 +44,28 @@ export const AdminImageManagementModal: React.FC<AdminImageManagementModalProps>
     }
   };
 
-  const handleFileSelect = async (
-  e: React.ChangeEvent<HTMLInputElement>
-) => {
-  const inputElement = e.currentTarget;
-  const files = inputElement.files;
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.currentTarget.files;
+    if (!files || files.length === 0) return;
 
-  if (!files || files.length === 0) return;
+    const fileArray = Array.from(files);
+    setIsUploading(true);
+    setUploadError(null);
 
-  const fileArray = Array.from(files);
-  setIsUploading(true);
-  setUploadError(null);
-
-  try {
-    await adminImageService.uploadProductImages(productId, fileArray);
-
-    await loadImages();
-
-    // Reset the file input safely
-    inputElement.value = '';
-
-    onImageUpdate();
-  } catch (err) {
-    console.error('Failed to upload images:', err);
-    setUploadError(
-      `Failed to upload images: ${
-        err instanceof Error ? err.message : 'Unknown error'
-      }`
-    );
-  } finally {
-    setIsUploading(false);
-  }
-};
+    try {
+      await adminImageService.uploadProductImages(productId, fileArray);
+      // Reload images after successful upload
+      await loadImages();
+      // Reset file input
+      e.currentTarget.value = '';
+      onImageUpdate();
+    } catch (err) {
+      console.error('Failed to upload images:', err);
+      setUploadError(`Failed to upload images: ${err instanceof Error ? err.message : 'Unknown error'}`);
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const handleDeleteImage = async (imageId: string) => {
     if (!window.confirm('Are you sure you want to delete this image?')) return;
@@ -134,8 +124,8 @@ export const AdminImageManagementModal: React.FC<AdminImageManagementModalProps>
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+    <div className="modal-backdrop fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+      <div className="modal-panel bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <h2 className="font-playfair text-2xl font-bold text-chocolate mb-4">
           Manage Images - {productName}
         </h2>

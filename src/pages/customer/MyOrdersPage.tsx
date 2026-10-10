@@ -59,7 +59,7 @@ export const MyOrdersPage: React.FC = () => {
   if (isLoading) {
     return (
       <CustomerLayout>
-        <section className="max-w-7xl mx-auto px-4 py-16">
+        <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-16">
           <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">
             My Orders
           </h1>
@@ -74,7 +74,7 @@ export const MyOrdersPage: React.FC = () => {
   if (error) {
     return (
       <CustomerLayout>
-        <section className="max-w-7xl mx-auto px-4 py-16">
+        <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-16">
           <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">
             My Orders
           </h1>
@@ -89,11 +89,11 @@ export const MyOrdersPage: React.FC = () => {
   if (orders.length === 0) {
     return (
       <CustomerLayout>
-        <section className="max-w-7xl mx-auto px-4 py-16">
+        <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-16">
           <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">
             My Orders
           </h1>
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="motion-card bg-white rounded-lg shadow-md p-12 text-center">
             <p className="text-5xl mb-4">📦</p>
             <h2 className="font-playfair text-2xl font-bold text-chocolate mb-3">
               No orders yet
@@ -115,7 +115,7 @@ export const MyOrdersPage: React.FC = () => {
 
   return (
     <CustomerLayout>
-      <section className="max-w-7xl mx-auto px-4 py-8">
+      <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">
           My Orders
         </h1>
@@ -170,7 +170,7 @@ export const MyOrdersPage: React.FC = () => {
           {/* Order Details */}
           {selectedOrder && (
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+              <div className="motion-card bg-white rounded-lg shadow-md p-6 sticky top-4">
                 <h2 className="font-playfair text-xl font-bold text-chocolate mb-4">
                   Order Details
                 </h2>

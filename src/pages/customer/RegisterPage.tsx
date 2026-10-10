@@ -54,8 +54,8 @@ export const RegisterPage: React.FC = () => {
 
   return (
     <CustomerLayout>
-      <section className="max-w-md mx-auto px-4 py-16">
-        <div className="bg-white rounded-lg shadow-lg p-8">
+      <section data-reveal="up" className="max-w-md mx-auto px-4 py-16">
+        <div className="motion-card bg-white rounded-lg shadow-lg p-8">
           <h1 className="font-playfair text-3xl font-bold text-chocolate text-center mb-2">
             Create Account
           </h1>
@@ -70,7 +70,7 @@ export const RegisterPage: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-chocolate mb-1">
                   First Name
@@ -141,7 +141,7 @@ export const RegisterPage: React.FC = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-semibold text-chocolate mb-1">
                   City

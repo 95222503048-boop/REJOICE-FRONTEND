@@ -11,7 +11,7 @@ export const OrderRequestSuccessPage: React.FC = () => {
   if (!order) {
     return (
       <CustomerLayout>
-        <section className="max-w-7xl mx-auto px-4 py-16">
+        <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-16">
           <div className="text-center">
             <p className="text-gray-600 mb-4">Order data not found</p>
             <Link to="/menu" className="text-chocolate font-semibold hover:underline">
@@ -25,10 +25,10 @@ export const OrderRequestSuccessPage: React.FC = () => {
 
   return (
     <CustomerLayout>
-      <section className="max-w-7xl mx-auto px-4 py-16">
+      <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto">
           {/* Success Message */}
-          <div className="bg-white rounded-lg shadow-md p-12 text-center mb-8">
+          <div className="motion-card bg-white rounded-lg shadow-md p-12 text-center mb-8">
             <div className="text-6xl mb-6">✅</div>
             <h1 className="font-playfair text-3xl font-bold text-chocolate mb-3">
               Order Placed Successfully!
@@ -39,7 +39,7 @@ export const OrderRequestSuccessPage: React.FC = () => {
           </div>
 
           {/* Order Details */}
-          <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+          <div className="motion-card bg-white rounded-lg shadow-md p-8 mb-8">
             <h2 className="font-playfair text-2xl font-bold text-chocolate mb-6">
               Order Details
             </h2>

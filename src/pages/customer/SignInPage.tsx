@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { CustomerLayout } from '../../layouts/CustomerLayout';
 import { useAuth } from '../../contexts/AuthContext';
@@ -10,23 +10,13 @@ interface LocationState {
 export const SignInPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const from = (location.state as LocationState)?.from || '/my-orders';
-
-  useEffect(() => {
-  if (!user) return;
-
-  if (user.role === 'admin') {
-    navigate('/admin/products', { replace: true });
-  } else {
-    navigate(from, { replace: true });
-  }
-}, [user, from, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +25,7 @@ export const SignInPage: React.FC = () => {
 
     try {
       await login(email, password);
+      navigate(from);
     } catch (err) {
       setError('Login failed. Please try again.');
     } finally {
@@ -44,8 +35,8 @@ export const SignInPage: React.FC = () => {
 
   return (
     <CustomerLayout>
-      <section className="max-w-md mx-auto px-4 py-16">
-        <div className="bg-white rounded-lg shadow-lg p-8">
+      <section data-reveal="up" className="max-w-md mx-auto px-4 py-16">
+        <div className="motion-card bg-white rounded-lg shadow-lg p-8">
           <h1 className="font-playfair text-3xl font-bold text-chocolate text-center mb-2">
             Sign In
           </h1>

@@ -19,7 +19,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gold hover:shadow-lg transition-shadow">
+    <div data-reveal="up" className="motion-card bg-white rounded-lg shadow-md p-6 border-l-4 border-gold hover:shadow-lg transition-shadow">
       {/* Rating */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">

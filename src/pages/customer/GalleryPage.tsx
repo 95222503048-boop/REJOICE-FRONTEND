@@ -24,7 +24,7 @@ export const GalleryPage: React.FC = () => {
   return (
     <CustomerLayout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
+      <section data-reveal="up" className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-block mb-4">
             <span className="bg-gold/30 text-gold px-4 py-2 rounded-full text-sm font-semibold">
@@ -52,7 +52,7 @@ export const GalleryPage: React.FC = () => {
       <div className="bg-gold/20 h-1 w-24 mx-auto"></div>
 
       {/* Filter Pills */}
-      <section className="bg-cream py-6 px-4 border-b border-gold/20">
+      <section data-reveal="up" className="bg-cream py-6 px-4 border-b border-gold/20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap gap-2 justify-center">
             {filters.map((filter) => (
@@ -73,10 +73,10 @@ export const GalleryPage: React.FC = () => {
       </section>
 
       {/* Masonry Gallery */}
-      <section className="py-12 px-4 bg-cream">
+      <section data-reveal="up" className="py-12 px-4 bg-cream">
         <div className="max-w-7xl mx-auto">
           {/* Masonry Grid using CSS Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-max">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-max stagger-children">
             {filteredImages.map((image, idx) => {
               // Alternate sizing for visual interest
               const isLarge = idx === 0 || idx === 6;
@@ -127,7 +127,7 @@ export const GalleryPage: React.FC = () => {
       </section>
 
       {/* Instagram Community Banner */}
-      <section className="bg-gradient-to-r from-chocolate to-chocolate/80 text-cream py-12 px-4">
+      <section data-reveal="up" className="bg-gradient-to-r from-chocolate to-chocolate/80 text-cream py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="font-playfair text-2xl font-bold mb-4">
             Share Your Rejoice Moments
@@ -147,7 +147,7 @@ export const GalleryPage: React.FC = () => {
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-cream py-12 px-4">
+      <section data-reveal="up" className="bg-cream py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="font-playfair text-2xl font-bold text-chocolate mb-4">
             Order Your Masterpiece
@@ -167,10 +167,10 @@ export const GalleryPage: React.FC = () => {
       {/* Image Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+          className="modal-backdrop fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="bg-white rounded-lg max-w-2xl w-full p-4" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-panel bg-white rounded-lg max-w-2xl w-full p-4" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-end mb-4">
               <button
                 onClick={() => setSelectedImage(null)}

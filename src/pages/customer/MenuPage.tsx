@@ -55,7 +55,7 @@ export const MenuPage: React.FC = () => {
   return (
     <CustomerLayout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
+      <section data-reveal="up" className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-block mb-4">
             <span className="bg-gold/30 text-gold px-4 py-2 rounded-full text-sm font-semibold">
@@ -83,7 +83,7 @@ export const MenuPage: React.FC = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="bg-cream border-b border-gold/20 py-6 px-4">
+      <section data-reveal="up" className="bg-cream border-b border-gold/20 py-6 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap gap-2 justify-center">
             {categoryList.map((cat) => (
@@ -104,7 +104,7 @@ export const MenuPage: React.FC = () => {
       </section>
 
       {/* Products Section */}
-      <section className="py-12 px-4 bg-cream">
+      <section data-reveal="up" className="py-12 px-4 bg-cream">
         <div className="max-w-7xl mx-auto">
           {isLoading ? (
             <div className="text-center py-12">
@@ -119,7 +119,7 @@ export const MenuPage: React.FC = () => {
               <p className="text-chocolate/60">No products found</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} variant="featured" />
               ))}
@@ -129,7 +129,7 @@ export const MenuPage: React.FC = () => {
       </section>
 
       {/* Info Section */}
-      <section className="bg-chocolate text-cream rounded-lg p-8 m-4">
+      <section data-reveal="up" className="bg-chocolate text-cream rounded-lg p-8 m-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center">
             <h4 className="font-playfair text-2xl font-bold mb-2">Custom Orders</h4>

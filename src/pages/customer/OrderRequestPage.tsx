@@ -66,11 +66,11 @@ export const OrderRequestPage: React.FC = () => {
   if (items.length === 0) {
     return (
       <CustomerLayout>
-        <section className="max-w-7xl mx-auto px-4 py-16">
+        <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-16">
           <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">
             Checkout
           </h1>
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="motion-card bg-white rounded-lg shadow-md p-12 text-center">
             <p className="text-gray-600 mb-4">Your cart is empty</p>
             <button
               onClick={() => navigate('/menu')}
@@ -86,7 +86,7 @@ export const OrderRequestPage: React.FC = () => {
 
   return (
     <CustomerLayout>
-      <section className="max-w-7xl mx-auto px-4 py-8">
+      <section data-reveal="up" className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="font-playfair text-3xl font-bold text-chocolate mb-8">
           Checkout
         </h1>
@@ -102,7 +102,7 @@ export const OrderRequestPage: React.FC = () => {
               )}
 
               {/* Delivery Mode */}
-              <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="motion-card bg-white rounded-lg shadow-md p-6">
                 <h3 className="font-semibold text-chocolate mb-4">Delivery Method</h3>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3">
@@ -129,7 +129,7 @@ export const OrderRequestPage: React.FC = () => {
               </div>
 
               {/* Delivery Date */}
-              <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="motion-card bg-white rounded-lg shadow-md p-6">
                 <h3 className="font-semibold text-chocolate mb-4">Requested Delivery Date</h3>
                 <input
                   type="date"
@@ -146,7 +146,7 @@ export const OrderRequestPage: React.FC = () => {
 
               {/* Address (if delivery) */}
               {deliveryMode === 'delivery' && (
-                <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="motion-card bg-white rounded-lg shadow-md p-6">
                   <h3 className="font-semibold text-chocolate mb-4">Delivery Address</h3>
                   <textarea
                     value={address}
@@ -160,7 +160,7 @@ export const OrderRequestPage: React.FC = () => {
               )}
 
               {/* Special Notes */}
-              <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="motion-card bg-white rounded-lg shadow-md p-6">
                 <h3 className="font-semibold text-chocolate mb-4">Special Requests (Optional)</h3>
                 <textarea
                   value={notes}
@@ -183,7 +183,7 @@ export const OrderRequestPage: React.FC = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+            <div className="motion-card bg-white rounded-lg shadow-md p-6 sticky top-4">
               <h2 className="font-playfair text-xl font-bold text-chocolate mb-4">
                 Order Summary
               </h2>

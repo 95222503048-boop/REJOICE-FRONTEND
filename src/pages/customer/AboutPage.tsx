@@ -5,7 +5,7 @@ import { BUSINESS_INFO } from '../../data/mockData';
 export const AboutPage: React.FC = () => {
   return (
     <CustomerLayout>
-      <section className="max-w-4xl mx-auto px-4 py-16">
+      <section data-reveal="up" className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="font-playfair text-4xl font-bold text-chocolate mb-4">
             About {BUSINESS_INFO.name}
@@ -17,7 +17,7 @@ export const AboutPage: React.FC = () => {
         </div>
 
         {/* Story */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+        <div className="motion-card bg-white rounded-lg shadow-md p-8 mb-8">
           <h2 className="font-playfair text-2xl font-bold text-chocolate mb-4">
             Our Story
           </h2>
@@ -40,7 +40,7 @@ export const AboutPage: React.FC = () => {
         </div>
 
         {/* Values */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 stagger-children">
           {[
             {
               title: 'Quality',

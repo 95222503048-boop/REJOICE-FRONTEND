@@ -51,7 +51,7 @@ export const HelpPage: React.FC = () => {
   return (
     <CustomerLayout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
+      <section data-reveal="up" className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
             Help & Support
@@ -63,11 +63,11 @@ export const HelpPage: React.FC = () => {
       </section>
 
       {/* Contact Cards */}
-      <section className="bg-cream py-12 px-4 border-b border-gold/20">
+      <section data-reveal="up" className="bg-cream py-12 px-4 border-b border-gold/20">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children">
             {/* Phone */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+            <div className="motion-card bg-white rounded-lg shadow-md p-6 text-center">
               <div className="text-4xl mb-3">📞</div>
               <h3 className="font-bold text-chocolate mb-2">Call Us</h3>
               <a
@@ -82,7 +82,7 @@ export const HelpPage: React.FC = () => {
             </div>
 
             {/* Instagram */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+            <div className="motion-card bg-white rounded-lg shadow-md p-6 text-center">
               <div className="text-4xl mb-3">📷</div>
               <h3 className="font-bold text-chocolate mb-2">Message on Instagram</h3>
               <a
@@ -99,7 +99,7 @@ export const HelpPage: React.FC = () => {
             </div>
 
             {/* Visit */}
-            <div className="bg-white rounded-lg shadow-md p-6 text-center">
+            <div className="motion-card bg-white rounded-lg shadow-md p-6 text-center">
               <div className="text-4xl mb-3">🏠</div>
               <h3 className="font-bold text-chocolate mb-2">Visit Our Kitchen</h3>
               <p className="text-sm text-chocolate">
@@ -116,7 +116,7 @@ export const HelpPage: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 px-4 bg-cream">
+      <section data-reveal="up" className="py-12 px-4 bg-cream">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-playfair text-3xl font-bold text-chocolate text-center mb-12">
             Frequently Asked Questions
@@ -124,7 +124,7 @@ export const HelpPage: React.FC = () => {
 
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div key={idx} className="motion-card bg-white rounded-lg shadow-md overflow-hidden">
                 <button
                   onClick={() =>
                     setExpandedFaq(expandedFaq === idx ? null : idx)
@@ -154,7 +154,7 @@ export const HelpPage: React.FC = () => {
       </section>
 
       {/* Business Assurance */}
-      <section className="bg-chocolate text-cream py-12 px-4">
+      <section data-reveal="up" className="bg-chocolate text-cream py-12 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-playfair text-2xl font-bold text-center mb-8">
             Why Trust Rejoice?
@@ -193,7 +193,7 @@ export const HelpPage: React.FC = () => {
       </section>
 
       {/* Baker Contact Banner */}
-      <section className="bg-cream py-12 px-4">
+      <section data-reveal="up" className="bg-cream py-12 px-4">
         <div className="max-w-4xl mx-auto bg-chocolate text-cream rounded-lg p-8 text-center">
           <h3 className="font-playfair text-2xl font-bold mb-4">
             🧑‍🍳 Want to Speak with the Baker?

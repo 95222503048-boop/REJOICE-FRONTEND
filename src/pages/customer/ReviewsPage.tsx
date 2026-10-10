@@ -10,31 +10,6 @@ export const ReviewsPage: React.FC = () => {
   const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [filterBy, setFilterBy] = useState<FilterOption>('all');
   const [showWriteForm, setShowWriteForm] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(0);
-  const [reviewName, setReviewName] = useState('');
-  const [reviewTitle, setReviewTitle] = useState('');
-  const [reviewText, setReviewText] = useState('');
-  const [reviewSuccess, setReviewSuccess] = useState(false);
-  const [reviewError, setReviewError] = useState('');
-
-  const handleReviewSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setReviewError('');
-
-    if (selectedRating === 0) {
-      setReviewError('Please choose your star rating before sharing your review.');
-      return;
-    }
-
-    // This page currently has no review API wired up. This confirms the
-    // front-end interaction only; it does not save the review to the server.
-    setReviewSuccess(true);
-    setShowWriteForm(false);
-    setSelectedRating(0);
-    setReviewName('');
-    setReviewTitle('');
-    setReviewText('');
-  };
 
   // Filter and sort reviews
   let filteredReviews = [...REVIEWS];
@@ -75,7 +50,7 @@ export const ReviewsPage: React.FC = () => {
   return (
     <CustomerLayout>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
+      <section data-reveal="up" className="bg-gradient-to-br from-chocolate to-chocolate/80 text-cream py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-block mb-4">
@@ -143,7 +118,7 @@ export const ReviewsPage: React.FC = () => {
       </section>
 
       {/* Filter and Sort */}
-      <section className="bg-cream border-b border-gold/20 py-6 px-4">
+      <section data-reveal="up" className="bg-cream border-b border-gold/20 py-6 px-4">
         <div className="max-w-7xl mx-auto flex flex-wrap gap-4 justify-between items-center">
           <div className="flex gap-2 flex-wrap">
             {(['all', '5star', '4star', '3star'] as FilterOption[]).map((filter) => (
@@ -178,16 +153,16 @@ export const ReviewsPage: React.FC = () => {
       </section>
 
       {/* Reviews Grid */}
-      <section className="py-12 px-4 bg-cream">
+      <section data-reveal="up" className="py-12 px-4 bg-cream">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 stagger-children">
             {filteredReviews.map((review) => (
               <ReviewCard key={review.id} review={review} />
             ))}
           </div>
 
           {/* Customer Photos Mosaic */}
-          <div className="bg-white rounded-lg shadow-md p-8 mb-12">
+          <div className="motion-card bg-white rounded-lg shadow-md p-8 mb-12">
             <h3 className="font-playfair text-2xl font-bold text-chocolate mb-6 text-center">
               Customer Creations
             </h3>
@@ -217,115 +192,62 @@ export const ReviewsPage: React.FC = () => {
               Have you ordered from us? We'd love to hear about your experience!
             </p>
 
-            {reviewSuccess && (
-              <div
-                role="status"
-                aria-live="polite"
-                className="mb-6 rounded-lg border border-gold/60 bg-white/10 p-5"
-              >
-                <p className="font-playfair text-xl font-bold text-gold">
-                  ✨ You’ve sprinkled a little sweetness into our day!
-                </p>
-                <p className="mt-2 text-cream/90">
-                  Thank you for sharing your experience with Rejoice Cakes &amp; Sweets.
-                  Your kind words mean the world to our bakers. 💛
-                </p>
-                <p className="mt-3 text-xs text-cream/70">
-                  This review form is currently a front-end demo; your review is not
-                  saved to the website until a review API is connected.
-                </p>
-              </div>
-            )}
-
             {!showWriteForm ? (
               <button
-                onClick={() => {
-                  setReviewSuccess(false);
-                  setReviewError('');
-                  setShowWriteForm(true);
-                }}
+                onClick={() => setShowWriteForm(true)}
                 className="bg-gold text-chocolate px-6 py-3 rounded font-semibold hover:bg-opacity-90 transition-all"
               >
                 Write a Review
               </button>
             ) : (
-              <form onSubmit={handleReviewSubmit} className="bg-chocolate/50 p-6 rounded space-y-4">
+              <form className="bg-chocolate/50 p-6 rounded space-y-4">
                 <div>
-                  <label htmlFor="review-name" className="block text-sm font-semibold mb-2">Your Name</label>
+                  <label className="block text-sm font-semibold mb-2">Your Name</label>
                   <input
-                    id="review-name"
                     type="text"
-                    value={reviewName}
-                    onChange={(e) => setReviewName(e.target.value)}
                     className="w-full px-4 py-2 rounded bg-cream text-chocolate"
                     placeholder="Enter your name"
-                    autoComplete="name"
-                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-2">
-                    Rating {selectedRating > 0 ? `— ${selectedRating} out of 5 stars` : '— choose a rating'}
-                  </label>
-                  <div className="flex gap-2" role="group" aria-label="Choose a star rating">
+                  <label className="block text-sm font-semibold mb-2">Rating</label>
+                  <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
-                        onClick={() => {
-                          setSelectedRating(star);
-                          setReviewError('');
-                        }}
-                        aria-label={`${star} star${star === 1 ? '' : 's'}`}
-                        aria-pressed={selectedRating === star}
-                        className={`text-3xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold hover:scale-125 ${
-                          star <= selectedRating ? 'text-gold drop-shadow-sm' : 'text-cream/40 hover:text-gold/80'
-                        }`}
+                        className="text-3xl hover:scale-125 transition-transform"
                       >
                         ★
                       </button>
                     ))}
                   </div>
-                  {reviewError && (
-                    <p role="alert" className="mt-2 text-sm text-amber-200">{reviewError}</p>
-                  )}
                 </div>
                 <div>
-                  <label htmlFor="review-title" className="block text-sm font-semibold mb-2">Review Title</label>
+                  <label className="block text-sm font-semibold mb-2">Review Title</label>
                   <input
-                    id="review-title"
                     type="text"
-                    value={reviewTitle}
-                    onChange={(e) => setReviewTitle(e.target.value)}
                     className="w-full px-4 py-2 rounded bg-cream text-chocolate"
                     placeholder="What was your favorite?"
-                    required
                   />
                 </div>
                 <div>
-                  <label htmlFor="review-text" className="block text-sm font-semibold mb-2">Your Review</label>
+                  <label className="block text-sm font-semibold mb-2">Your Review</label>
                   <textarea
-                    id="review-text"
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
                     className="w-full px-4 py-2 rounded bg-cream text-chocolate h-32"
                     placeholder="Share your experience..."
-                    required
-                  />
+                  ></textarea>
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex gap-3">
                   <button
                     type="submit"
                     className="bg-gold text-chocolate px-6 py-2 rounded font-semibold hover:bg-opacity-90 transition-all"
                   >
-                    Share the Sweetness ✨
+                    Submit Review
                   </button>
                   <button
                     type="button"
-                    onClick={() => {
-                      setShowWriteForm(false);
-                      setReviewError('');
-                    }}
+                    onClick={() => setShowWriteForm(false)}
                     className="bg-cream/20 text-cream px-6 py-2 rounded font-semibold hover:bg-opacity-30 transition-all"
                   >
                     Cancel
